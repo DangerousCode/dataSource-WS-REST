@@ -12,6 +12,6 @@ public interface DataRepository extends PagingAndSortingRepository<Data, String>
 
     List<Data> findByNameStartsWithIgnoreCase(@Param("name") String name);
 
-    Data findByDni(@Param("name") String dni);
+    Data findByDni(@Param("dni") String dni);
 
 }
