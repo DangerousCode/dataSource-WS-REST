@@ -8,15 +8,18 @@ import javax.xml.ws.RequestWrapper;
 import javax.xml.ws.ResponseWrapper;
 import java.util.List;
 
-
-@WebService
+@WebService(targetNamespace = "http://service.ws.sample/", name = "Hello")
 public interface DataOperation {
 
-    @WebResult
-    @RequestWrapper
-    @WebMethod
-    @ResponseWrapper
-    Data createData(@WebParam Data data);
+    @WebResult(name = "return", targetNamespace = "")
+    @RequestWrapper(localName = "sayHello",
+        targetNamespace = "http://service.ws.sample/",
+        className = "sample.ws.service.SayHello")
+    @WebMethod(action = "urn:SayHello")
+    @ResponseWrapper(localName = "sayHelloResponse",
+        targetNamespace = "http://service.ws.sample/",
+        className = "sample.ws.service.SayHelloResponse")
+    Data createData(@WebParam(name = "data", targetNamespace = "") Data data);
 
     @WebResult
     @RequestWrapper
@@ -40,7 +43,7 @@ public interface DataOperation {
     @RequestWrapper
     @WebMethod
     @ResponseWrapper
-    Data update( Data data);
+    Data update(Data data);
 
     @WebResult
     @RequestWrapper

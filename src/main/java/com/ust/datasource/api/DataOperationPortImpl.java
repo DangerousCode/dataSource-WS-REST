@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 import javax.jws.WebService;
 import java.util.List;
 
-@WebService
+@WebService(serviceName = "HelloService", portName = "HelloPort",
+    targetNamespace = "http://service.ws.sample/",
+    endpointInterface = "com.ust.datasource.api.DataOperation")
 @Service
 @Slf4j
 public class DataOperationPortImpl implements DataOperation {
@@ -18,6 +20,7 @@ public class DataOperationPortImpl implements DataOperation {
     @Autowired
     private DataRepository dataRepository;
 
+    @Override
     public Data createData(final Data data) {
         log.info("data:{}", data);
         return dataRepository.save(data);
